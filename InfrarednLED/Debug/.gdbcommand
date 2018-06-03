@@ -1,0 +1,6 @@
+set sysroot /home/samsung/tizen-studio/tools/smart-build-interface/../../platforms/tizen-4.0/iot-headless/rootstraps/iot-headless-4.0-device.core
+set debug-file-directory /home/samsung/tizen-studio/tools/smart-build-interface/../../platforms/tizen-4.0/iot-headless/rootstraps/iot-headless-4.0-device.core/usr/lib/debug
+set solib-search-path /home/samsung/workspace/InfrarednLED/Debug
+dir /home/samsung/tizen-studio/tools/smart-build-interface/../../platforms/tizen-4.0/iot-headless/rootstraps/iot-headless-4.0-device.core/usr/src/debug
+file "/home/samsung/workspace/InfrarednLED/Debug/infrarednled"
+sharedlibrary
