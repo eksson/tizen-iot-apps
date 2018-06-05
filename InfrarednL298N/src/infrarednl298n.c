@@ -16,7 +16,7 @@
 
 
 #include <Ecore.h>
-#include <infrared_led_l298n.h>
+#include <infrarednl298n.h>
 #include <tizen.h>
 #include <service_app.h>
 
