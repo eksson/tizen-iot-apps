@@ -22,6 +22,21 @@ typedef enum {
 	DCMOTOR_MAX
 } dcmotor_id_e;
 
+typedef enum {
+	DCMOTOR_NONE,
+	DCMOTOR_STOP,
+	DCMOTOR_FORWARD,
+	DCMOTOR_BACKWARD,
+} dcmotor_state_e;
+
+typedef struct _dcmotor_driver {
+	unsigned int pin_1;
+	unsigned int pin_2;
+	dcmotor_state_e dcmt_state;
+	peripheral_gpio_h pin1_h;
+	peripheral_gpio_h pin2_h;
+} dcmotor_driver_h;
+
 /**
  * @param[in] id The motor id
  * @param[in] pin1 The first pin number to control motor
@@ -31,8 +46,7 @@ typedef enum {
  * @return 0 on success, otherwise a negative error value
  * @before resource_set_motor_driver_L298N_speed() : Optional
  */
-int dcmotor_L298N_driver_init(dcmotor_id_e dm_id,
-	unsigned int pin1, unsigned int pin2, unsigned en_ch);
+int dcmotor_L298N_driver_init(dcmotor_id_e dm_id, unsigned int pin1, unsigned int pin2);
 
 /**
  * @param[in] id The motor id
@@ -42,7 +56,7 @@ int dcmotor_L298N_driver_init(dcmotor_id_e dm_id,
  * @return 0 on success, otherwise a negative error value
  * @before resource_set_motor_driver_L298N_speed() : Optional
  */
-int dcmotor_L298N_speed_set(dcmotor_id_e dm_id, int speed);
+int dcmotor_L298N_run_set(dcmotor_id_e dm_id, int speed);
 
 
 void dcmotor_L298N_close(dcmotor_id_e dm_id);

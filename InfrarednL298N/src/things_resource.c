@@ -25,11 +25,11 @@ void things_resource_close_all(void)
 {
 	peripheral_gpio_h sensor_h;
 
+	dcmotor_L298N_close_all();
+
 	for (int pin_num = 1; pin_num <= GPIO_PIN_MAX; pin_num++) {
 		peripheral_gpio_open(pin_num, &sensor_h);
 		if (sensor_h) peripheral_gpio_close(sensor_h);
 		INFO("GPIO[%d] is closing...", pin_num);
 	}
-
-	dcmotor_L298N_close_all();
 }

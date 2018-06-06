@@ -49,7 +49,7 @@ int led_2pin_write(int pin_num, int write_value)
 		return ret;
 	}
 
-	INFO("LED Light : %s", write_value ? "OFF" : "ON");
+	INFO("LED Light : %s", write_value ? "ON" : "OFF");
 
 	return PERIPHERAL_ERROR_NONE;
 }

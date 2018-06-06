@@ -14,12 +14,10 @@
 #define LED_2PIN_PIN_NUMBER					20
 #define INFRARED_MOTION_SENSOR_PIN_NUMBER	21
 
-/* Default GPIO pins of raspberry pi 3 connected with IN pins of L298N */
-#define DCMOTOR1_EN_CH 17
+/* Default GPIO pins of raspberry pi 3 */
 #define DCMOTOR1_PIN1 27
 #define DCMOTOR1_PIN2 22
 
-#define DCMOTOR2_EN_CH 13
 #define DCMOTOR2_PIN1 6
 #define DCMOTOR2_PIN2 5
 

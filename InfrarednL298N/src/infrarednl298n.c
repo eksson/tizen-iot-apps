@@ -24,14 +24,11 @@
 
 #include "things_resource.h"
 
-int dcmt_1_speed = 0;
-int dcmt_2_speed = 0;
-
 Eina_Bool _control_sensor_cb(void *data)
 {
 	FN_CALL;
 
-	uint32_t value = -1;
+	uint32_t sensor_value = -1;
 	int ret = -1;
 
 	app_data *ad = (app_data *)data;
@@ -41,42 +38,30 @@ Eina_Bool _control_sensor_cb(void *data)
 		return ECORE_CALLBACK_CANCEL;						//=EINA_FALSE
 	}
 
-	ret = infrared_motion_sensor_read(INFRARED_MOTION_SENSOR_PIN_NUMBER, &value);
+	ret = infrared_motion_sensor_read(INFRARED_MOTION_SENSOR_PIN_NUMBER, &sensor_value);
 	if (ret != PERIPHERAL_ERROR_NONE) {
 		ERR("infrared_motion_sensor_read() failed!![%d]", ret);
-		service_app_exit();
-	}
+		dcmotor_L298N_run_set(DCMOTOR_1, DCMOTOR_STOP);
+		dcmotor_L298N_run_set(DCMOTOR_2, DCMOTOR_STOP);
 
-	INFO("Sensor Detected value : %d", value);
-
-	if (value) {
-		ret = led_2pin_write(LED_2PIN_PIN_NUMBER, LED_LIGHT_ON);
-
-		dcmt_1_speed += DCMOTOR_SPEED_STEP;
-		if (dcmt_1_speed > DCMOTOR_SPEED_MAX)
-			dcmt_1_speed = ((int)(DCMOTOR_SPEED_MAX / DCMOTOR_SPEED_STEP)) * DCMOTOR_SPEED_STEP;
-
-		dcmt_2_speed += DCMOTOR_SPEED_STEP;
-		if (dcmt_2_speed > DCMOTOR_SPEED_MAX)
-			dcmt_2_speed = ((int)(DCMOTOR_SPEED_MAX / DCMOTOR_SPEED_STEP)) * DCMOTOR_SPEED_STEP;
-	} else {
 		ret = led_2pin_write(LED_2PIN_PIN_NUMBER, LED_LIGHT_OFF);
+	} else if (sensor_value) {
+		dcmotor_L298N_run_set(DCMOTOR_1, DCMOTOR_BACKWARD);
+		dcmotor_L298N_run_set(DCMOTOR_2, DCMOTOR_BACKWARD);
+		INFO("dcmotors' status : DCMOTOR_1 run forward, DCMOTOR_2 run forward...");
 
-		dcmt_1_speed -= DCMOTOR_SPEED_STEP;
-		if (dcmt_1_speed > 0)
-			dcmt_1_speed = 0;
+		ret = led_2pin_write(LED_2PIN_PIN_NUMBER, LED_LIGHT_ON);
+	} else {
+		dcmotor_L298N_run_set(DCMOTOR_1, DCMOTOR_FORWARD);
+		dcmotor_L298N_run_set(DCMOTOR_2, DCMOTOR_FORWARD);
+		INFO("dcmotors' status : DCMOTOR_1 run backward, DCMOTOR_2 run forward...");
 
-		dcmt_2_speed -= DCMOTOR_SPEED_STEP;
-		if (dcmt_2_speed < 0)
-			dcmt_2_speed = 0;
+		ret = led_2pin_write(LED_2PIN_PIN_NUMBER, LED_LIGHT_OFF);
 	}
 
-	dcmotor_L298N_speed_set(DCMOTOR_1, dcmt_1_speed);
-	dcmotor_L298N_speed_set(DCMOTOR_2, dcmt_2_speed);
+	INFO("Sensor Detected value : %d", sensor_value);
 
 	INFO("LED result : %d", ret);
-
-	INFO("motor speed : DCMOTOR_1[%d], DCMOTOR_2[%d]...", dcmt_1_speed, dcmt_2_speed);
 
 	return ECORE_CALLBACK_RENEW;							//=EINA_TRUE
 }
@@ -96,13 +81,13 @@ bool service_app_create(void *data)
 		return false;
 	}
 
-	ret = dcmotor_L298N_driver_init(DCMOTOR_1, DCMOTOR1_PIN1, DCMOTOR1_PIN2, DCMOTOR1_EN_CH);
+	ret = dcmotor_L298N_driver_init(DCMOTOR_1, DCMOTOR1_PIN1, DCMOTOR1_PIN2);
 	if (ret) {
 		ERR("dcmotor_L298N_dirver_init(DCMOTOR_1) %d : ", ret);
 		service_app_exit();
 	}
 
-	ret = dcmotor_L298N_driver_init(DCMOTOR_2, DCMOTOR2_PIN1, DCMOTOR2_PIN2, DCMOTOR2_EN_CH);
+	ret = dcmotor_L298N_driver_init(DCMOTOR_2, DCMOTOR2_PIN1, DCMOTOR2_PIN2);
 	if (ret) {
 		ERR("dcmotor_L298N_driver_init(DCMOTOR_2) %d : ", ret);
 		service_app_exit();
@@ -119,17 +104,14 @@ void service_app_terminate(void *data)
 		ecore_timer_del(ad->getter_timer);
 	}
 
-	things_resource_close_all();
-
 	free(ad);
 }
 
 void service_app_control(app_control_h app_control, void *data)
 {
     /* APP_CONTROL */
-	dcmotor_L298N_speed_set(DCMOTOR_1, 0);
-	dcmotor_L298N_speed_set(DCMOTOR_2, 0);
-//	resource_set_servo_motor_value(0, 450);
+	dcmotor_L298N_run_set(DCMOTOR_1, DCMOTOR_STOP);
+	dcmotor_L298N_run_set(DCMOTOR_2, DCMOTOR_STOP);
 }
 
 int main(int argc, char* argv[])
