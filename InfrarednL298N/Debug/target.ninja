@@ -1,5 +1,0 @@
-build main_build: phony infrarednl298n
-build all: phony main_build
-default all
-edje-cc-dep-options = -deps $out.d
-binaryName = infrarednl298n
