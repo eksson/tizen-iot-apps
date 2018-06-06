@@ -84,3 +84,8 @@
 0	1	0	clean_cov	b3de405e02eb7ca8
 1	2	0	clean_sa	46ab9549445ac981
 2	5	0	clean	d59b6dac04fa9b5d
+0	29	0	src/resource/infrared_motion_sensor.o	63a1f41dc1b6f50
+0	32	0	src/resource/led_2pin.o	b8e69e18899db9dc
+0	130	0	src/things_resource.o	69e8d66d3c8c848b
+0	141	0	src/infrarednled.o	aef6587997127306
+141	248	0	infrarednled	293531d761544b5f
