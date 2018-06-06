@@ -21,7 +21,7 @@
 #include "things_resource.h"
 
 
-void things_close_all(void)
+void things_resource_close_all(void)
 {
 	peripheral_gpio_h sensor_h;
 
