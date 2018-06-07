@@ -46,14 +46,14 @@ Eina_Bool _control_sensor_cb(void *data)
 
 		ret = led_2pin_write(LED_2PIN_PIN_NUMBER, LED_LIGHT_OFF);
 	} else if (sensor_value) {
-		dcmotor_L298N_run_set(DCMOTOR_1, DCMOTOR_BACKWARD);
-		dcmotor_L298N_run_set(DCMOTOR_2, DCMOTOR_BACKWARD);
+		dcmotor_L298N_run_set(DCMOTOR_1, DCMOTOR_FORWARD);
+		dcmotor_L298N_run_set(DCMOTOR_2, DCMOTOR_FORWARD);
 		INFO("dcmotors' status : DCMOTOR_1 run forward, DCMOTOR_2 run forward...");
 
 		ret = led_2pin_write(LED_2PIN_PIN_NUMBER, LED_LIGHT_ON);
 	} else {
-		dcmotor_L298N_run_set(DCMOTOR_1, DCMOTOR_FORWARD);
-		dcmotor_L298N_run_set(DCMOTOR_2, DCMOTOR_FORWARD);
+		dcmotor_L298N_run_set(DCMOTOR_1, DCMOTOR_BACKWARD);
+		dcmotor_L298N_run_set(DCMOTOR_2, DCMOTOR_BACKWARD);
 		INFO("dcmotors' status : DCMOTOR_1 run backward, DCMOTOR_2 run forward...");
 
 		ret = led_2pin_write(LED_2PIN_PIN_NUMBER, LED_LIGHT_OFF);
