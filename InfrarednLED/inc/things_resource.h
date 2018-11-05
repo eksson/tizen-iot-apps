@@ -7,7 +7,7 @@
 #include <Ecore.h>
 
 #include <sensor/infrared_motion_sensor.h>
-#include <sensor/led_2pin.h>
+#include <sensor/led_2pin_sensor.h>
 
 
 #define GPIO_PIN_MAX	40
