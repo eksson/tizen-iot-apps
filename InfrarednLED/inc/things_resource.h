@@ -6,8 +6,8 @@
 #include <peripheral_io.h>
 #include <Ecore.h>
 
-#include "resource/infrared_motion_sensor.h"
-#include "resource/led_2pin.h"
+#include <sensor/infrared_motion_sensor.h>
+#include <sensor/led_2pin.h>
 
 
 #define GPIO_PIN_MAX	40
