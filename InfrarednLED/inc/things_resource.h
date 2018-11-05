@@ -4,11 +4,9 @@
 #define __THINGS_RESOURCE_H__
 
 #include <peripheral_io.h>
-#include <Ecore.h>
 
 #include <sensor/infrared_motion_sensor.h>
 #include <sensor/led_2pin_sensor.h>
-
 
 #define GPIO_PIN_MAX	40
 
