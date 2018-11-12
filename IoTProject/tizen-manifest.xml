@@ -12,6 +12,5 @@
         <privilege>http://tizen.org/privilege/internet</privilege>
         <privilege>http://tizen.org/privilege/alarm.set</privilege>
         <privilege>http://tizen.org/privilege/network.profile</privilege>
-        <privilege>http://tizen.org/privilege/peripheralio</privilege>
     </privileges>
 </manifest>
