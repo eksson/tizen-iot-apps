@@ -25,6 +25,8 @@
 
 bool service_app_create(void *data)
 {
+	FN_CALL;
+	
 	return true;
 }
 
