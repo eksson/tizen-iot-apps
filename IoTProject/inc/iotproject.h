@@ -3,7 +3,7 @@
 #ifndef __IOTPROJECT_H__
 #define __IOTPROJECT_H__
 
-
+#include <Ecore.h>
 #include <dlog.h>
 
 #ifdef  LOG_TAG
