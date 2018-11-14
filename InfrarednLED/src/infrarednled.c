@@ -30,7 +30,7 @@ bool service_app_create(void *data)
 
 	app_data *ad = data;
 
-	ad->getter_timer = ecore_timer_add(1.0f, _control_sensor_cb, ad);
+	ad->getter_timer = ecore_timer_add(10.0f, _control_sensor_cb, ad);
 
 	if (!ad->getter_timer) {
 		ERR("Failed to add getter timer");
