@@ -1,0 +1,7 @@
+# ninja log v5
+1	206	0	src/sensor/led_2pin.o	89e8fd1d6f4fa161
+1	206	0	src/things_resource.o	61f427e6f5d16eba
+1	207	0	src/sensor/infrared_motion_sensor.o	259f10b09b9b0a1e
+0	214	0	src/sensor/dcmotor_L298N.o	c74d5bd8d57d3a8c
+0	318	0	src/infrarednl298n.o	eb01a845d71fc752
+318	521	0	infrarednl298n	160693bd2c2cfa3d

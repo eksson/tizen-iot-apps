@@ -7,9 +7,9 @@
 
 
 #include <peripheral_io.h>
+#include <sensor/dcmotor_L298N.h>
 
 #include "log.h"
-#include "resource/dcmotor_L298N.h"
 
 
 static dcmotor_driver_h dcmd_h[DCMOTOR_MAX] = {

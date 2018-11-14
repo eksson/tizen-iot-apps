@@ -5,9 +5,9 @@
 
 #include <peripheral_io.h>
 
-#include "resource/infrared_motion_sensor.h"
-#include "resource/led_2pin.h"
-#include "resource/dcmotor_L298N.h"
+#include "sensor/dcmotor_L298N.h"
+#include "sensor/infrared_motion_sensor.h"
+#include "sensor/led_2pin.h"
 
 #define GPIO_PIN_MAX		40
 
