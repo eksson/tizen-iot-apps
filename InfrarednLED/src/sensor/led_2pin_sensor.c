@@ -6,9 +6,10 @@
  */
 
 
-
 #include <peripheral_io.h>
+
 #include "log.h"
+
 #define GPIO_PIN_MAX	40
 
 static peripheral_gpio_h gpio_h[GPIO_PIN_MAX + 1] = { NULL, };
